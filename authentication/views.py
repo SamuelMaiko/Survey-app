@@ -178,15 +178,24 @@ def email_results(request):
         count=1
         total=0
         for each in surveyquestions:
-            msg=f"\nQuestion {count} ({each.question.name}) -- {each.score}"
+            msg=f"\n{count}. {each.question.name} -- [ Result: {each.score} ]"
             message += msg
             count+=1
             total+=each.score
         
-        totalMsg=f"\n\nTotal {total}"
+        totalMsg=f"\n\nYour Total Points {total}"
         message+=totalMsg
         
-        signing_off="\n\nBest Regards,\nJuniour Dev,\nSamuel Maiko"
+        if total>=5 and total<=7:
+            money_profile="Conservative"
+        elif total>7 and total<11:
+            money_profile="Balanced"
+        elif total>10 and total<16:
+            money_profile="Agressive"
+        
+        message+=f'\n\nYour FINANCIAL PROFILE is "{money_profile}"'
+        
+        signing_off="\n\nUnderstanding your financial profile can help guide your financial decisions. If you have any questions or would like personalized advice based on your profile, feel free to reach out.\n\nThank you again for your participation\n\nBest Regards,\nJuniour Dev,\nSamuel Maiko"
         message+=signing_off
         
         subject="ELWANEX Survey Results"
