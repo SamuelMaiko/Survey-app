@@ -10,7 +10,7 @@ colorama==0.4.6
 cookiecutter==2.5.0
 cssselect==1.2.0
 cssutils==2.9.0
-Django==3.2.1
+Django==5.0.1
 django-browser-reload==1.12.1
 django-cors-headers==4.3.1
 django-tailwind==3.8.0
