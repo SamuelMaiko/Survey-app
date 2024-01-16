@@ -1,0 +1,45 @@
+{%  extends 'authentication/newBase.html' %}
+
+{% block title %} SignUp page {% endblock %}
+
+{% block content %}
+    <div class="grid place-items-center h-screen w-full">
+        <form class="w-[37rem] bg-red-300 p-8" method="post" action="#">
+            {% csrf_token %}
+            <h1 class="pb-4 text-3xl font-medium text-center">SignUp</h1>
+            <div class="mb-4">
+                <label class="block font-medium " for="{{form.username.id_for_label}}">Username:</label>
+                <input name="{{form.username.name}}" class="pl-4 h-[3rem] w-full" type="text" id="{{form.username.id_for_label}}" required>    
+                <div class="text-sm">{{form.username.help_text}}</div> 
+                {% for error in form.username.errors %}
+                <span class="text-red-500 text-sm">{{error}}</span>
+                {% endfor %}            
+            </div>
+            <div class="mb-4">
+                <label class="block font-medium " for="{{form.email.id_for_label}}">Email:</label>
+                <input name="{{form.email.name}}" class="pl-4 h-[3rem] w-full" type="email" id="{{form.email.id_for_label}}" required>  
+                <div class="text-sm">{{form.email.help_text}}</div> 
+                {% for error in form.email.errors %}
+                <span class="text-red-500 text-sm">{{error}}</span>
+                {% endfor %}                
+            </div>
+            <div class="mb-4">
+                <label class="block font-medium " for="{{form.password1.id_for_label}}">Password:</label>
+                <input name="{{form.password1.name}}" class="pl-4 h-[3rem] w-full" type="password" id="{{form.password1.id_for_label}}" required>  
+                <div class="text-sm">{{form.password1.help_text}}</div>   
+                {% for error in form.password1.errors %}
+                <span class="text-red-500 text-sm">{{error}}</span>
+                {% endfor %}               
+            </div>
+            <div class="mb-4">
+                <label class="block font-medium " for="{{form.password2.id_for_label}}">Confirm Password:</label>
+                <input name="{{form.password2.name}}" class="pl-4 h-[3rem] w-full" type="password" id="{{form.password2.id_for_label}}" required> 
+                <div class="text-sm">{{form.password2.help_text}}</div> 
+                {% for error in form.password2.errors %}
+                <span class="text-red-500 text-sm">{{error}}</span><br>
+                {% endfor %}                  
+            </div>
+            <button class="bg-blue-900 text-white px-3 py-2 rounded-lg w-full text-lg" type="submit">Register</button>
+        </form>
+    </div>
+{% endblock %}

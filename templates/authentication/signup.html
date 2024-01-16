@@ -1,0 +1,70 @@
+{%  extends 'authentication/newBase.html' %}
+
+{% block title %} SignUp page {% endblock %}
+
+{% block content %}
+    <div class="grid place-items-center h-screen w-full">
+        <form class="w-[93%] md:w-[60%] lg:w-[35%] shadow-[1px_1px_10px_rgba(0,0,0,0.2)] p-5 pb-16 lg:pb-6 rounded-md" method="post" action="#">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                <div>{{error}}</div>
+                {% endfor %}
+            {% endif %}
+
+            
+            <p class="text-[1.2rem] my-8">Already have an account? <a class="underline font-medium" href="{% url 'sign_in' %}">Sign In</a></p>
+            <h1 class="pb-4 text-3xl font-medium text-center">SignUp</h1>
+            
+            <div class="mb-4 text-[1.2rem]">
+                <label class="block font-medium " for="{{form.username.id_for_label}}">Username:</label>
+                <input 
+                    value="{{request.POST.username}}" 
+                    name="{{form.username.name}}" 
+                    class="pl-[1rem] focus:pl-[0.940rem] shadow-[1px_1px_7px_rgba(0,0,0,0.1)]  h-[3rem] w-full {% if 'username' in form.errors %}
+                    focus:ring-0 focus:border-red-500 border-[1px] focus:border-[2px] border-red-500   {% endif %}" 
+                    type="text" id="{{form.username.id_for_label}}" required
+                > 
+                <div class="text-sm hidden">{{form.username.help_text}}</div> 
+                {% for error in form.username.errors %}
+                <span class="text-red-500 text-sm">{{error}}</span>
+                {% endfor %}            
+            </div>
+            <div class="mb-4 text-[1.2rem]">
+                <label class="block font-medium " for="{{form.email.id_for_label}}">Email:</label>
+                <input value="{{request.POST.email}}" name="{{form.email.name}}" class="pl-4 shadow-[1px_1px_7px_rgba(0,0,0,0.1)] h-[3rem] w-full" type="email" id="{{form.email.id_for_label}}" required>  
+                <div class="text-sm">{{form.email.help_text}}</div> 
+                {% for error in form.email.errors %}
+                <span class="text-red-500 text-sm">{{error}}</span>
+                {% endfor %}                
+            </div>
+            <div class="mb-4 text-[1.2rem]">
+                <label class="block font-medium " for="{{form.password1.id_for_label}}">Password:</label>
+                <input value="{{request.POST.password1}}" name="{{form.password1.name}}" class="pl-4 shadow-[1px_1px_7px_rgba(0,0,0,0.1)] h-[3rem] w-full" type="password" id="{{form.password1.id_for_label}}" required>  
+                <div class="text-sm hidden">{{form.password1.help_text}}</div>   
+                {% for error in form.password1.errors %}
+                <span class="text-red-500 text-sm">{{error}}</span>
+                {% endfor %}               
+            </div>
+            <div class="mb-4 text-[1.2rem]">
+                <label class="block font-medium " for="{{form.password2.id_for_label}}">Confirm Password:</label>
+                <input 
+                    value="{{request.POST.password2}}" 
+                    name="{{form.password2.name}}" 
+                    class="pl-[1rem] focus:pl-[0.940rem] shadow-[1px_1px_7px_rgba(0,0,0,0.1)] h-[3rem] w-full {% if 'password2' in form.errors %}
+                    focus:ring-0 focus:border-red-500 border-[1px] focus:border-[2px] border-red-500  {% endif %}" 
+                    type="password" 
+                    id="{{form.password2.id_for_label}}" 
+                    required
+                    >
+                <div class="text-sm hidden">{{form.password2.help_text}}</div> 
+                {% for error in form.password2.errors %}
+                <span class="text-red-500 text-sm">{{error}}</span><br>
+                {% endfor %}                  
+            </div>
+            <button class="bg-[#4caf50] hover:bg-[#45a049] transition-colors duration-300 text-[1.31rem] text-[#ffffff] px-3 py-2 rounded-lg w-full text-lg" type="submit">Register</button>
+            
+        </form>
+    </div>
+{% endblock %}

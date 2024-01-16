@@ -1,0 +1,52 @@
+{%  extends 'authentication/newBase.html' %}
+
+{% block title %} SignIn page {% endblock %}
+
+{% block content %}
+
+
+
+    <div class="grid place-items-center h-screen w-full">
+        <form class="w-[93%] md:w-[60%] lg:w-[35%] shadow-[1px_1px_10px_rgba(0,0,0,0.2)] p-5 pb-16 rounded-md" method="post" action="#">
+            {% csrf_token %}
+            <h1 class="pb-4 text-3xl font-medium text-center">SignIn</h1>
+
+            <p class="text-[1.2rem] my-8">Don't have an account? <a class="underline font-medium" href="{% url 'sign_up' %}">Sign Up</a></p>
+
+
+            <div class="mb-4 text-[1.2rem]">
+                <label class="block font-medium " for="{{form.email.id_for_label}}">Username:</label>
+                <input 
+                    value="{{request.POST.username}}" 
+                    name="{{form.username.name}}"
+                    class="pl-[1rem] shadow-[1px_1px_7px_rgba(0,0,0,0.1)] focus:pl-[0.940rem] h-[3rem] w-full {% for message in messages %}{% if 'error' in message.tags %}
+                    focus:ring-0 focus:border-red-500 border-[1px] focus:border-[2px] border-red-500   {% endif %} {% endfor %}" 
+                    type="text" 
+                    id="{{form.username.id_for_label}}" 
+                    required
+                 >  
+                <div class="text-sm">{{form.username.help_text}}</div> 
+                {% for error in form.username.errors %}
+                <span class="text-red-500 text-sm">{{error}}</span>
+                {% endfor %}                
+            </div>
+            <div class="mb-4 text-[1.2rem]">
+                <label class="block font-medium " for="{{form.password.id_for_label}}">Password:</label>
+                <input 
+                    value="{{request.POST.password}}" 
+                    name="{{form.password.name}}" 
+                    class="pl-[1rem] shadow-[1px_1px_7px_rgba(0,0,0,0.1)] focus:pl-[0.940rem] h-[3rem] w-full {% for message in messages %}{% if 'error' in message.tags %}
+                    focus:ring-0 focus:border-red-500 border-[1px] focus:border-[2px] border-red-500   {% endif %} {% endfor %}" 
+                    type="password" 
+                    id="{{form.password.id_for_label}}" 
+                    required
+                >  
+                <div class="text-sm">{{form.password.help_text}}</div>   
+                {% for error in form.password.errors %}
+                <span class="text-red-500 text-sm">{{error}}</span>
+                {% endfor %}               
+            </div>
+            <button class="bg-[#4caf50] hover:bg-[#45a049] transition-colors duration-300 text-[1.31rem] text-[#ffffff] px-3 py-2 rounded-lg w-full text-lg" type="submit">SignIn</button>
+        </form>
+    </div>
+{% endblock %}

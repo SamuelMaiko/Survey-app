@@ -1,0 +1,14 @@
+{% autoescape off %}
+
+Hello {{user.username}},
+
+Thank you for creating an account with ELWANEX surveys.
+
+Click here to activate your account: http://{{domain}}{% url 'account__activation' uid64=uid64 token=token %}
+
+
+Best Regards,
+Junior Dev
+Samuel Maiko
+
+{% endautoescape %}
