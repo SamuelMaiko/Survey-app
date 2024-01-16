@@ -34,7 +34,7 @@ SECRET_KEY = 'django-insecure-lbn8+5enk$28di1x74q9$n9--ih4y$ng8j944l@ue(yy59oaex
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'elwanex-survey-app.onrender.com']
 
 
 # Application definition
