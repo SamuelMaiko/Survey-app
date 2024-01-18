@@ -7,7 +7,7 @@
 
     <div class="h-[5rem] w-full bg-[#4caf50] flex items-center px-4 ">
         <a href="{% url 'homepage' %}">
-            <p class="text-[2.5rem] font-medium text-[#ffffff]">Logo</p>
+            <p class="text-[1rem] lg:text-[1.1rem] font-medium text-[#ffffff]">Logo</p>
         </a>
     </div>
     <a href="{% url 'last__question' %}" class="underline hover:no-underline text-blue-700 ml-4">Go Back</a>
@@ -16,16 +16,16 @@
         <div class="w-[98%] mx-auto bg-[#ffffff] shadow-[1px_1px_10px_rgba(0,0,0,0.15)] overflow-hidden rounded-lg mt-6 pb-16 pt-8 p-5">
 
             
-            <h1 class="text-2xl font-medium">Thank you for participating in the survey</h1>
-            <p class="text-lg mt-8 mb-2">Click the button below if you wish to receive results in your email</p>
+            <h1 class="text-lg lg:text-xl font-medium">Thank you for participating in the survey</h1>
+            <p class="text-[1rem] lg:text-[1.1rem] mt-8 mb-2">Click the button below if you wish to receive results in your email</p>
             
             <form class="w-full" method="post" action="{% url 'email__results' %}">
                 {% csrf_token %}
                 <div>
-                    <label class="text-[1.2rem] font-medium" for="email_r">Email:</label>
-                    <input class="block shadow-[1px_1px_8px_rgba(0,0,0,0.2)] mb-2 w-full pl-[0.5rem] h-[3rem] text-[1.01rem]" name="email" value="{{user.email}}" id="email_r" type="text">
+                    <label class="text-[1rem] lg:text-[1.1rem] font-medium" for="email_r">Email:</label>
+                    <input class="block shadow-[1px_1px_8px_rgba(0,0,0,0.2)] mb-2 w-full pl-[0.5rem] h-[3rem] text-[1rem]" name="email" value="{{user.email}}" id="email_r" type="text">
                 </div>
-                <button class="px-3 py-2 w-full mt-1 text-white bg-red-900 hover:bg-red-950 transition-colors duration-300 rounded-lg text-[1.31rem]">Send</button>
+                <button class="px-3 py-2 w-full mt-1 text-white bg-red-900 hover:bg-red-950 transition-colors duration-300 rounded-lg text-[1rem] lg:text-[1.1rem]">Send</button>
             </form>
         </div>
         {{messagi}}

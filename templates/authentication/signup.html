@@ -14,10 +14,10 @@
             {% endif %}
 
             
-            <p class="text-[1.2rem] my-8">Already have an account? <a class="underline font-medium" href="{% url 'sign_in' %}">Sign In</a></p>
-            <h1 class="pb-4 text-3xl font-medium text-center">SignUp</h1>
+            <h1 class="pb-4 text-xl lg:text-2xl font-medium text-center">SignUp</h1>
+            <p class="lg:text-[1.1rem] my-8">Already have an account? <a class="underline font-medium" href="{% url 'sign_in' %}">Sign In</a></p>
             
-            <div class="mb-4 text-[1.2rem]">
+            <div class="mb-4 text-[1rem]">
                 <label class="block font-medium " for="{{form.username.id_for_label}}">Username:</label>
                 <input 
                     value="{{request.POST.username}}" 
@@ -31,7 +31,7 @@
                 <span class="text-red-500 text-sm">{{error}}</span>
                 {% endfor %}            
             </div>
-            <div class="mb-4 text-[1.2rem]">
+            <div class="mb-4 text-[1rem]">
                 <label class="block font-medium " for="{{form.email.id_for_label}}">Email:</label>
                 <input value="{{request.POST.email}}" name="{{form.email.name}}" class="pl-4 shadow-[1px_1px_7px_rgba(0,0,0,0.1)] h-[3rem] w-full" type="email" id="{{form.email.id_for_label}}" required>  
                 <div class="text-sm">{{form.email.help_text}}</div> 
@@ -39,7 +39,7 @@
                 <span class="text-red-500 text-sm">{{error}}</span>
                 {% endfor %}                
             </div>
-            <div class="mb-4 text-[1.2rem]">
+            <div class="mb-4 text-[1rem]">
                 <label class="block font-medium " for="{{form.password1.id_for_label}}">Password:</label>
                 <input value="{{request.POST.password1}}" name="{{form.password1.name}}" class="pl-4 shadow-[1px_1px_7px_rgba(0,0,0,0.1)] h-[3rem] w-full" type="password" id="{{form.password1.id_for_label}}" required>  
                 <div class="text-sm hidden">{{form.password1.help_text}}</div>   
@@ -47,7 +47,7 @@
                 <span class="text-red-500 text-sm">{{error}}</span>
                 {% endfor %}               
             </div>
-            <div class="mb-4 text-[1.2rem]">
+            <div class="mb-4 text-[1rem]">
                 <label class="block font-medium " for="{{form.password2.id_for_label}}">Confirm Password:</label>
                 <input 
                     value="{{request.POST.password2}}" 
@@ -63,7 +63,7 @@
                 <span class="text-red-500 text-sm">{{error}}</span><br>
                 {% endfor %}                  
             </div>
-            <button class="bg-[#4caf50] hover:bg-[#45a049] transition-colors duration-300 text-[1.31rem] text-[#ffffff] px-3 py-2 rounded-lg w-full text-lg" type="submit">Register</button>
+            <button class="bg-[#4caf50] hover:bg-[#45a049] transition-colors duration-300 text-[1rem] lg:text-[1.1rem] text-[#ffffff] px-3 py-2 rounded-lg w-full text-lg" type="submit">Register</button>
             
         </form>
     </div>

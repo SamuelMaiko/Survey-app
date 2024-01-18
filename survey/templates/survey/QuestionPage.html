@@ -6,12 +6,12 @@
 <div class="h-screen overflow-y-hidden">
     <div class="h-[5rem] w-full bg-[#4caf50] flex items-center px-4 ">
         <a href="{% url 'homepage' %}">
-            <p class="text-[2.5rem] font-medium text-[#ffffff]">Logo</p>
+            <p class="lg:text-[2.5rem] text-[1.6rem] font-medium text-[#ffffff]">Logo</p>
         </a>
     </div>
-    <p class="text-[1.2rem] pl-2 flex gap-5 mt-1">
-        <span class="h-1 w-[0.5rem] ">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-[1.45rem] w-[2rem]">
+    <p class="md:text-[1rem] text-[0.9rem] pl-2 flex gap-5 md:gap-5 mt-1">
+        <span class="md:h-1 h-[0.2rem] w-[0.1rem] lg:w-[0.5rem] ">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-[1.45rem] w-[1.2rem] lg:w-[1.5rem]">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
             </svg>          
         </span>
@@ -23,7 +23,7 @@
             <form class="" method="post" action="{% url 'submit__answer' question.id %}">
                 {% csrf_token %}
                 
-                <h1 class="text-2xl font-medium">{{question.name}}</h1>
+                <h1 class="text-[1.2rem] lg:text-[1.38rem] font-medium">{{question.name}}</h1>
                 {% for choice in question.choices.all %}
                 <div class="mt-2">
                     {% if answer.name == choice.name %} 
@@ -33,19 +33,19 @@
                             value="{{choice.id}}" 
                             type="radio" 
                             id="ch{{choice.id}}" 
-                            class="w-4 h-4"
+                            class="w-3 h-3"
                             checked
                         >
-                        <label for="ch{{choice.id}}" class="text-1xl">{{choice.name}}</label>
+                        <label for="ch{{choice.id}}" class="text-[1rem] lg:text-[1.1rem]">{{choice.name}}</label>
                         {% else %}
                         <input 
                         name="user_choice" 
                         value="{{choice.id}}" 
                         type="radio"
                         id="ch{{choice.id}}" 
-                        class="w-4 h-4"
+                        class="w-3 h-3"
                         >
-                        <label for="ch{{choice.id}}" class="text-1xl">{{choice.name}}</label>
+                        <label for="ch{{choice.id}}" class=" text-[1rem] lg:text-[1.1rem]">{{choice.name}}</label>
                         {% endif %}
                         
                     </div>
@@ -54,12 +54,12 @@
                     <div class="flex justify-between md:w-[50%] mt-10">
                         
                         <a href="{% url 'previous__question' question.id %}">
-                            <button type="button" class="px-4 py-1 text-[1.21rem] rounded-lg bg-[#4caf50] hover:bg-[#45a049] transition-colors duration-300 text-white">Back</button>
+                            <button type="button" class="px-4 py-1 text-[1rem] lg:text-[1.1rem] rounded-lg bg-[#4caf50] hover:bg-[#45a049] transition-colors duration-300 text-white">Back</button>
                         </a>
 
-                        <button type="submit" class="px-4 py-1 text-[1.21rem] rounded-lg bg-[#4caf50] hover:bg-[#45a049] transition-colors duration-300 text-white">Submit</button>
+                        <button type="submit" class="px-4 py-1 text-[1rem] lg:text-[1.1rem] rounded-lg bg-[#4caf50] hover:bg-[#45a049] transition-colors duration-300 text-white">Submit</button>
                         <a href="{% url 'next__question' question.id %}">
-                            <button type="button" class="px-4 py-1 text-[1.21rem] rounded-lg bg-[#4caf50] hover:bg-[#45a049] transition-colors duration-300 text-white">Next</button>
+                            <button type="button" class="px-4 py-1 text-[1rem] lg:text-[1.1rem] rounded-lg bg-[#4caf50] hover:bg-[#45a049] transition-colors duration-300 text-white">Next</button>
                         </a>
                     </div>
                     
@@ -67,31 +67,31 @@
                 
 
                 
-                <span class="absolute text-[rgba(82,185,82,0.3)] w-[4.3rem] h-8 left-0 top-24">
+                <span class="absolute text-[rgba(82,185,82,0.3)] w-[4.3rem] hidden h-8 left-0 top-24">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6 9 12.75l4.286-4.286a11.948 11.948 0 0 1 4.306 6.43l.776 2.898m0 0 3.182-5.511m-3.182 5.51-5.511-3.181" />
                     </svg>              
                 </span>
-                <span class="absolute -z-1 text-[rgba(82,185,82,0.3)] w-[4.3rem] h-8 left-32 rotate-45 top-0">
+                <span class="absolute -z-1 text-[rgba(82,185,82,0.3)] w-[4.3rem] hidden h-8 left-32 rotate-45 top-0">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 21v-7.5a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349M3.75 21V9.349m0 0a3.001 3.001 0 0 0 3.75-.615A2.993 2.993 0 0 0 9.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 0 0 2.25 1.016c.896 0 1.7-.393 2.25-1.015a3.001 3.001 0 0 0 3.75.614m-16.5 0a3.004 3.004 0 0 1-.621-4.72l1.189-1.19A1.5 1.5 0 0 1 5.378 3h13.243a1.5 1.5 0 0 1 1.06.44l1.19 1.189a3 3 0 0 1-.621 4.72M6.75 18h3.75a.75.75 0 0 0 .75-.75V13.5a.75.75 0 0 0-.75-.75H6.75a.75.75 0 0 0-.75.75v3.75c0 .414.336.75.75.75Z" />
                       </svg>
                                    
                 </span>
-                <span class="absolute -z-1 text-[rgba(82,185,82,0.3)] w-[4.3rem] h-8 left-40 rotate-45 top-28">
+                <span class="absolute -z-1 text-[rgba(82,185,82,0.3)] w-[4.3rem] hidden h-8 left-40 rotate-45 top-28">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z" />
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 18a3.75 3.75 0 0 0 .495-7.468 5.99 5.99 0 0 0-1.925 3.547 5.975 5.975 0 0 1-2.133-1.001A3.75 3.75 0 0 0 12 18Z" />
                       </svg>                    
                                    
                 </span>
-                <span class="absolute -z-1 text-[rgba(82,185,82,0.3)] w-[4.3rem] h-8 right-10 rotate-45 top-10">
+                <span class="absolute -z-1 text-[rgba(82,185,82,0.3)] w-[4.3rem] hidden h-8 right-10 rotate-45 top-10">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
                     </svg>                                        
                                    
                 </span>
-                <span class="absolute  text-[rgba(82,185,82,0.3)] w-[4.3rem] h-8 right-10  top-48">
+                <span class="absolute  text-[rgba(82,185,82,0.3)] w-[4.3rem] hidden h-8 right-10  top-48">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" />
                       </svg>
@@ -99,27 +99,27 @@
                                    
                 </span>
 
-                <span class="absolute  text-[rgba(82,185,82,0.3)] w-[4.3rem] h-8 right-10 bottom-28">
+                <span class="absolute  text-[rgba(82,185,82,0.3)] w-[4.3rem] hidden h-8 right-10 bottom-28">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M14.25 6.087c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.036-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959v0a.64.64 0 0 1-.657.643 48.39 48.39 0 0 1-4.163-.3c.186 1.613.293 3.25.315 4.907a.656.656 0 0 1-.658.663v0c-.355 0-.676-.186-.959-.401a1.647 1.647 0 0 0-1.003-.349c-1.036 0-1.875 1.007-1.875 2.25s.84 2.25 1.875 2.25c.369 0 .713-.128 1.003-.349.283-.215.604-.401.959-.401v0c.31 0 .555.26.532.57a48.039 48.039 0 0 1-.642 5.056c1.518.19 3.058.309 4.616.354a.64.64 0 0 0 .657-.643v0c0-.355-.186-.676-.401-.959a1.647 1.647 0 0 1-.349-1.003c0-1.035 1.008-1.875 2.25-1.875 1.243 0 2.25.84 2.25 1.875 0 .369-.128.713-.349 1.003-.215.283-.4.604-.4.959v0c0 .333.277.599.61.58a48.1 48.1 0 0 0 5.427-.63 48.05 48.05 0 0 0 .582-4.717.532.532 0 0 0-.533-.57v0c-.355 0-.676.186-.959.401-.29.221-.634.349-1.003.349-1.035 0-1.875-1.007-1.875-2.25s.84-2.25 1.875-2.25c.37 0 .713.128 1.003.349.283.215.604.401.96.401v0a.656.656 0 0 0 .658-.663 48.422 48.422 0 0 0-.37-5.36c-1.886.342-3.81.574-5.766.689a.578.578 0 0 1-.61-.58v0Z" />
                     </svg>                                                           
                                    
                 </span>
-                <span class="absolute  text-[rgba(82,185,82,0.3)] w-[4.3rem] h-8 rotate-45 left-10 bottom-48">
+                <span class="absolute  text-[rgba(82,185,82,0.3)] w-[4.3rem] hidden h-8 rotate-45 left-10 bottom-48">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z" />
                     </svg>
                                                                                 
                                    
                 </span>
-                <span class="absolute  text-[rgba(82,185,82,0.3)] w-[4.3rem] h-8 rotate-45 left-32 bottom-36">
+                <span class="absolute  text-[rgba(82,185,82,0.3)] w-[4.3rem] hidden h-8 rotate-45 left-32 bottom-36">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 7.5.415-.207a.75.75 0 0 1 1.085.67V10.5m0 0h6m-6 0h-1.5m1.5 0v5.438c0 .354.161.697.473.865a3.751 3.751 0 0 0 5.452-2.553c.083-.409-.263-.75-.68-.75h-.745M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                     </svg>                     
                                                                                 
                                    
                 </span>
-                <span class="absolute  text-[rgba(82,185,82,0.3)] w-[4.3rem] h-8 -rotate-45 right-16 bottom-52">
+                <span class="absolute  text-[rgba(82,185,82,0.3)] w-[4.3rem] hidden h-8 -rotate-45 right-16 bottom-52">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
                     </svg>
