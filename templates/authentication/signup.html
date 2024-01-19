@@ -15,7 +15,7 @@
 
             
             <h1 class="pb-4 text-xl lg:text-2xl font-medium text-center">SignUp</h1>
-            <p class="lg:text-[1.1rem] my-8">Already have an account? <a class="underline font-medium" href="{% url 'sign_in' %}">Sign In</a></p>
+            <p class="text-[1rem] lg:text-[1.1rem] my-8">Already have an account? <a class="underline font-medium" href="{% url 'sign_in' %}">Sign In</a></p>
             
             <div class="mb-4 text-[1rem]">
                 <label class="block font-medium " for="{{form.username.id_for_label}}">Username:</label>
@@ -63,7 +63,7 @@
                 <span class="text-red-500 text-sm">{{error}}</span><br>
                 {% endfor %}                  
             </div>
-            <button class="bg-[#4caf50] hover:bg-[#45a049] transition-colors duration-300 text-[1rem] lg:text-[1.1rem] text-[#ffffff] px-3 py-2 rounded-lg w-full text-lg" type="submit">Register</button>
+            <button class="bg-[#4caf50] hover:bg-[#45a049] transition-colors duration-300 text-[0.9rem] lg:text-[1.1rem] text-[#ffffff] px-3 py-2 rounded-lg w-full text-lg" type="submit">Register</button>
             
         </form>
     </div>
