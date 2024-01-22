@@ -1,15 +1,33 @@
 {%  extends 'authentication/newBase.html' %}
 
-{% block title %} SignIn page {% endblock %}
+{% block title %} Login Page {% endblock %}
 
 {% block content %}
 
 
 
     <div class="grid place-items-center h-screen w-full">
+        {% if messages %}
+            {% for m in messages%}
+            <div class="w-[93%] md:w-[60%] lg:w-[35%] text-[0.9rem] lg:text-[1.03rem] text-amber-800 bg-amber-100 shadow-[1px_1px_10px_rgba(0,0,0,0.2)] p-5">
+                <h1><strong>Hey!</strong>{{message}}</h1>
+            </div>
+            {% endfor %}
+        {% endif %}
+
+        
+        
+        
         <form class="w-[93%] md:w-[60%] lg:w-[35%] shadow-[1px_1px_10px_rgba(0,0,0,0.2)] p-5 pb-16 rounded-md" method="post" action="#">
             {% csrf_token %}
-            <h1 class="pb-4 text-xl lg:text-2xl font-medium text-center">SignIn</h1>
+
+            {% if form.non_field_errors %}
+            {% for n in form.non_field_errors %}
+                <p class="text-[1rem] lg:text-[1.1rem]">{{n}}</p>
+            {% endfor %}
+            {% endif %}
+            
+            <h1 class="pb-4 text-xl lg:text-2xl font-medium text-center">Sign In</h1>
 
             <p class="text-[1rem] lg:text-[1.1rem] my-8">Don't have an account? <a class="underline text-[1rem] lg:text-[1.1rem] font-medium" href="{% url 'sign_up' %}">Sign Up</a></p>
 
@@ -19,8 +37,8 @@
                 <input 
                     value="{{request.POST.username}}" 
                     name="{{form.username.name}}"
-                    class="pl-[1rem] shadow-[1px_1px_7px_rgba(0,0,0,0.1)] focus:pl-[0.940rem] h-[3rem] w-full {% for message in messages %}{% if 'error' in message.tags %}
-                    focus:ring-0 focus:border-red-500 border-[1px] focus:border-[2px] border-red-500   {% endif %} {% endfor %} text-[1rem]" 
+                    class="pl-[1rem] shadow-[1px_1px_7px_rgba(0,0,0,0.1)] focus:pl-[0.940rem] h-[3rem] w-full {% if form.non_field_errors %}
+                    focus:ring-0 focus:border-red-500 border-[1px] focus:border-[2px] border-red-500   {% endif %} text-[1rem]" 
                     type="text" 
                     id="{{form.username.id_for_label}}" 
                     required
@@ -35,8 +53,8 @@
                 <input 
                     value="{{request.POST.password}}" 
                     name="{{form.password.name}}" 
-                    class="pl-[1rem] shadow-[1px_1px_7px_rgba(0,0,0,0.1)] focus:pl-[0.940rem] h-[3rem] w-full {% for message in messages %}{% if 'error' in message.tags %}
-                    focus:ring-0 focus:border-red-500 border-[1px] focus:border-[2px] border-red-500   {% endif %} {% endfor %} text-[1rem]" 
+                    class="pl-[1rem] shadow-[1px_1px_7px_rgba(0,0,0,0.1)] focus:pl-[0.940rem] h-[3rem] w-full {% if form.non_field_errors %}
+                    focus:ring-0 focus:border-red-500 border-[1px] focus:border-[2px] border-red-500   {% endif %} text-[1rem]" 
                     type="password" 
                     id="{{form.password.id_for_label}}" 
                     required
@@ -46,7 +64,7 @@
                 <span class="text-red-500 text-sm">{{error}}</span>
                 {% endfor %}               
             </div>
-            <button class="bg-[#4caf50] hover:bg-[#45a049] transition-colors duration-300 text-[1rem] lg:text-[1.1rem] text-[#ffffff] px-3 py-2 rounded-lg w-full text-lg" type="submit">SignIn</button>
+            <button class="bg-[#4caf50] hover:bg-[#45a049] transition-colors duration-300 text-[0.9rem] lg:text-[1.1rem] text-[#ffffff] px-3 py-2 rounded-lg w-full text-lg" type="submit">SignIn</button>
         </form>
     </div>
 {% endblock %}

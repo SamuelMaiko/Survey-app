@@ -17,6 +17,23 @@
         </span>
         {{user.email}}
     </p>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="notif_div w-[90%] absolute left-1/2 -translate-x-1/2 top-[5.5rem] md:top-[5rem] mx-auto lg:mt-2 md:w-[60%] lg:w-[55%]">
+
+                <div class="relative  text-[0.9rem] lg:text-[1.03rem] {% if message.tags == 'error' %} text-amber-800 bg-amber-100 {% elif message.tags == 'success' %} text-white bg-green-500 {% endif %} shadow-[1px_1px_10px_rgba(0,0,0,0.2)] p-4 lg:p-5">
+                    <h1><strong class="mr-2">Hey!</strong>{{message}}</h1>
+                    <div class="notif__cancel absolute z-10 top-1/2 -translate-y-1/2 right-4 transition-colors duration-300 rounded-full p-1 {% if message.tags == 'success' %} text-white {% else %} text-amber-800 {% endif %} hover:text-[#333333] cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                        </svg>              
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+
     <div class=" relative w-full h-full grid place-items-center text-[1.2rem] ">
         
         <div class="gridy__questions bg-[#ffffff] shadow-[1px_1px_13px_rgba(0,188,0,0.3)] w-[93%] mx-auto rounded-lg  p-4">
@@ -33,7 +50,7 @@
                             value="{{choice.id}}" 
                             type="radio" 
                             id="ch{{choice.id}}" 
-                            class="w-3 h-3"
+                            class="radio__button w-3 h-3"
                             checked
                         >
                         <label for="ch{{choice.id}}" class="text-[1rem] lg:text-[1.1rem]">{{choice.name}}</label>
@@ -43,7 +60,7 @@
                         value="{{choice.id}}" 
                         type="radio"
                         id="ch{{choice.id}}" 
-                        class="w-3 h-3"
+                        class="radio__button w-3 h-3"
                         >
                         <label for="ch{{choice.id}}" class=" text-[1rem] lg:text-[1.1rem]">{{choice.name}}</label>
                         {% endif %}
@@ -57,7 +74,10 @@
                             <button type="button" class="px-4 py-1 text-[1rem] lg:text-[1.1rem] rounded-lg bg-[#4caf50] hover:bg-[#45a049] transition-colors duration-300 text-white">Back</button>
                         </a>
 
-                        <button type="submit" class="px-4 py-1 text-[1rem] lg:text-[1.1rem] rounded-lg bg-[#4caf50] hover:bg-[#45a049] transition-colors duration-300 text-white">Submit</button>
+                        <button type="submit" class="submit__btn hidden px-4 py-1 text-[1rem] lg:text-[1.1rem] rounded-lg bg-[#4caf50] hover:bg-[#45a049] transition-colors duration-300 text-white">Submit</button>
+                        
+                        
+
                         <a href="{% url 'next__question' question.id %}">
                             <button type="button" class="px-4 py-1 text-[1rem] lg:text-[1.1rem] rounded-lg bg-[#4caf50] hover:bg-[#45a049] transition-colors duration-300 text-white">Next</button>
                         </a>
@@ -127,6 +147,27 @@
                                                                                 
                                    
                 </span>
+
+                <script>
+                    const allRadiobtns=document.querySelectorAll('.radio__button')
+
+                    for (const radio of allRadiobtns){
+                        radio.addEventListener('change', ()=>{
+                            
+                            if (radio.checked){
+                                document.querySelector('.submit__btn').style.display="block"
+
+                            }
+                        })
+                    }
+                    const notifCancelBtn=document.querySelector('.notif__cancel')
+                    notifCancelBtn.addEventListener('click', ()=>{
+                        document.querySelector('.notif_div').style.display="none"
+                    })
+                    const intervalId=setInterval(()=>{
+                        document.querySelector('.notif_div').style.display="none"
+                    }, 3000)
+                </script>
 
 
             </div>

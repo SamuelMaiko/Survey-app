@@ -13,6 +13,7 @@ from .tokens import generate_token
 from premailer import Premailer
 from django.contrib import messages
 from survey.models import SurveyQuestion
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def homepage(request): 
@@ -75,11 +76,12 @@ def signup(request):
                 email=EmailMessage(subject, message, sender, recipient_list)
                 email.fail_silently=True
                 email.send()
-                
+                messages.success(request, "Account created successfully! Check email for activation link")
                             
                 return redirect("sign_in")
             except Exception as e:
                 form.add_error(None, f"Database error: {str(e)}")
+                message.error(request, "Server error!")
                 context={
                 "form":form,
             }
@@ -126,7 +128,7 @@ def signin(request):
         
         if user is not None:
             login(request, user)
-            messages.success(request,"You are now logged in successfully! Check email for account activation link")
+            messages.success(request,"You are now logged in successfully!")
             
             
                         
@@ -134,6 +136,7 @@ def signin(request):
         else: 
             messages.error(request,"Invalid credentials")
             form=LoginForm(request.POST)
+            # form.add_error(None,"Enter ")
             context={
         'form':form,
     }
@@ -145,27 +148,29 @@ def signin(request):
         'form':form,
     }
     return render(request,'authentication/signin.html', context)
-    
+ 
+@login_required    
 def signout(request):
     
     logout(request)
+    messages.success(request, "You have logged out successfully!")
     return redirect("sign_in")
 
-def custom(request):
+# def custom(request):
     
-    # latest_survey=request.user.surveys.last()
+#     # latest_survey=request.user.surveys.last()
     
-    # latest_surveyquestions=SurveyQuestion.objects.filter(survey_id=latest_survey.id).all()
+#     # latest_surveyquestions=SurveyQuestion.objects.filter(survey_id=latest_survey.id).all()
     
     
-    context={
-    #    'username': request.user.username,
-    #    'surveyquestion':latest_surveyquestions,
-    }
+#     context={
+#     #    'username': request.user.username,
+#     #    'surveyquestion':latest_surveyquestions,
+#     }
     
-    return render(request, 'authentication/survey_results_email.html',context)
+#     return render(request, 'authentication/survey_results_email.html',context)
 
-
+# 
 def email_results(request):
     if request.method == 'POST':
         user_email=request.POST.get('email')
@@ -192,6 +197,8 @@ def email_results(request):
             money_profile="Balanced"
         elif total>10 and total<16:
             money_profile="Agressive"
+        else:
+            money_profile="Out of bounds"
         
         message+=f'\n\nYour FINANCIAL PROFILE is "{money_profile}"'
         
@@ -208,9 +215,11 @@ def email_results(request):
         try:
         
             send_mail(subject, message, sender, recipient_list, fail_silently=True)
+            messages.success(request,"Check email for survey results")
             return redirect('homepage')
             
         except:
+            messages.error(request,"Failed to send results")
             return HttpResponse("email results send failed")
         
         

@@ -1,0 +1,17 @@
+{% extends 'authentication/newBase.html' %}
+
+{% block title %}
+Successful Activation
+{% endblock %}
+
+{% block content %}
+<div class="h-screen w-full grid place-items-center">
+    <div class="w-[93%] md:w-[60%] lg:w-[35%] shadow-[1px_1px_10px_rgba(0,0,0,0.1)] p-5 pb-16 rounded-md">
+
+        <h1 class="text-[1.1rem] lg:text-[1.2rem] text-[#333333] font-medium ">Hello {{user.username}}</h1>
+        <h1 class="text-[1.1rem] lg:text-[1.2rem] text-green-500 font-medium ">Your account has been activated successfully! </h1>
+        <p>Login here <a class="underline text-blue-500 hover:text-blue-700 font-medium transition-colors duration-300" href="{% url 'sign_up' %}">Login</a></p>
+        
+    </div>
+</div>
+{% endblock %}

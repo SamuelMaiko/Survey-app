@@ -4,7 +4,7 @@
 
 {% block content %} 
 
-<div class="h-screen overflow-y-scroll pb-14 w-full">
+<div class="container__div relative h-screen overflow-y-scroll pb-14 w-full">
     <div class="h-[5rem] bg-[#4caf50] items-center px-4 flex justify-between ">
         <a href="{% url 'homepage' %}">
             <p class="lg:text-[2.5rem] text-[1.6rem] font-medium text-[#ffffff]">Logo</p>
@@ -20,7 +20,23 @@
         </button>
 
     </div>
-    {% if user.is_authenticated %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="notif_div w-[90%] absolute left-1/2 -translate-x-1/2 top-[5.5rem] md:top-[5rem] mx-auto lg:mt-2 md:w-[60%] lg:w-[55%]">
+
+                <div class="relative  text-[0.9rem] lg:text-[1.03rem] {% if message.tags == 'error' %} text-amber-800 bg-amber-100 {% elif message.tags == 'success' %} text-white bg-green-500 {% endif %} shadow-[1px_1px_10px_rgba(0,0,0,0.2)] p-4 lg:p-5">
+                    <h1><strong class="mr-2">Hey!</strong>{{message}}</h1>
+                    <div class="notif__cancel absolute top-1/2 -translate-y-1/2 right-4 transition-colors duration-300 rounded-full p-1 {% if message.tags == 'success' %} text-white {% else %} text-amber-800 {% endif %} hover:text-[#333333] cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                        </svg>              
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+        {% if user.is_authenticated %}
     <div class="gridy__home">
 
         
@@ -81,7 +97,7 @@
     <h1>You are logged out</h1>
     {%endif%}
 
-    <div class="gridy__side hide bg-[#f4f4f4] transition-transform duration-700 md:hidden shadow-[-5px_5px_18px_rgba(0,0,0,0.5)] fixed right-0 top-0 bottom-0 w-[300px]">
+    <div class="gridy__side hide bg-[#f4f4f4] transition-transform duration-500 md:hidden shadow-[-5px_5px_18px_rgba(0,0,0,0.1)] fixed right-0 top-0 bottom-0 w-[300px]">
         <button class="gridy__cancel absolute left-2 top-2 bg-[rgba(0,198,0,0.2)] hover:bg-[rgba(0,198,0,0.4)] transition-colors duration-300 rounded-full p-1 text-[#333333]">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
@@ -100,6 +116,8 @@
             </a>
 
         </div>
+
+       
     </div>
 
 </div>

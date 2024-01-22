@@ -1,0 +1,79 @@
+{%  extends 'authentication/newBase.html' %}
+
+{% block title %} SignIn page {% endblock %}
+
+{% block content %}
+
+
+
+    <div class="grid place-items-center h-screen w-full">
+        {% if messages %}
+        {% for message in messages %}
+            <div class="notif_div absolute w-[93%] top-10 lg:top-2 mt-1 md:w-[60%] lg:w-[35%]">
+
+                <div class="relative text-[0.9rem] lg:text-[1.03rem] {% if message.tags == 'error' %} text-amber-800 bg-amber-100 {% elif message.tags == 'success' %} text-white bg-green-500 {% endif %} shadow-[1px_1px_10px_rgba(0,0,0,0.2)] p-4 lg:p-5">
+                    <h1 class="pr-8"><strong class="mr-2">Hey!</strong>{{message}}</h1>
+                    <div class="notif__cancel absolute top-1/2 -translate-y-1/2 right-4 transition-colors duration-300 rounded-full p-1 {% if message.tags == 'success' %} text-white {% else %} text-amber-800 {% endif %} hover:text-[#333333] cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                        </svg>              
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+        <form class="w-[93%] md:w-[60%] lg:w-[35%] shadow-[1px_1px_10px_rgba(0,0,0,0.2)] p-5 pb-16 rounded-md" method="post" action="#">
+            {% csrf_token %}
+            
+            <h1 class="pb-4 text-xl lg:text-2xl font-medium text-center">Sign In</h1>
+
+            <p class="text-[1rem] lg:text-[1.1rem] my-8">Don't have an account? <a class="underline text-[1rem] lg:text-[1.1rem] font-medium" href="{% url 'sign_up' %}">Sign Up</a></p>
+
+
+            <div class="mb-4 text-[1rem]">
+                <label class="block text-[1rem] font-medium " for="{{form.email.id_for_label}}">Username:</label>
+                <input 
+                    value="{{request.POST.username}}" 
+                    name="{{form.username.name}}"
+                    class="pl-[1rem] shadow-[1px_1px_7px_rgba(0,0,0,0.1)] focus:pl-[0.940rem] h-[3rem] w-full {% for message in messages %}{% if 'error' in message.tags %}
+                    focus:ring-0 focus:border-red-500 border-[1px] focus:border-[2px] border-red-500   {% endif %} {% endfor %} text-[1rem]" 
+                    type="text" 
+                    id="{{form.username.id_for_label}}" 
+                    required
+                 >  
+                <div class="text-sm">{{form.username.help_text}}</div> 
+                {% for error in form.username.errors %}
+                <span class="text-red-500 text-sm">{{error}}</span>
+                {% endfor %}                
+            </div>
+            <div class="mb-4 text-[1rem]">
+                <label class="block text-[1rem] lg:text-[1.05rem] font-medium " for="{{form.password.id_for_label}}">Password:</label>
+                <input 
+                    value="{{request.POST.password}}" 
+                    name="{{form.password.name}}" 
+                    class="pl-[1rem] shadow-[1px_1px_7px_rgba(0,0,0,0.1)] focus:pl-[0.940rem] h-[3rem] w-full {% for message in messages %}{% if 'error' in message.tags %}
+                    focus:ring-0 focus:border-red-500 border-[1px] focus:border-[2px] border-red-500   {% endif %} {% endfor %} text-[1rem]" 
+                    type="password" 
+                    id="{{form.password.id_for_label}}" 
+                    required
+                >  
+                <div class="text-sm">{{form.password.help_text}}</div>   
+                {% for error in form.password.errors %}
+                <span class="text-red-500 text-sm">{{error}}</span>
+                {% endfor %}               
+            </div>
+            <button class="bg-[#4caf50] hover:bg-[#45a049] transition-colors duration-300 text-[0.9rem] lg:text-[1.1rem] text-[#ffffff] px-3 py-2 rounded-lg w-full text-lg" type="submit">SignIn</button>
+        </form>
+
+        <script>
+            
+            const notifCancelBtn=document.querySelector('.notif__cancel')
+            notifCancelBtn.addEventListener('click', ()=>{
+                document.querySelector('.notif_div').style.display="none"
+            })
+            const intervalId=setInterval(()=>{
+                document.querySelector('.notif_div').style.display="none"
+            }, 5000)
+        </script>
+    </div>
+{% endblock %}

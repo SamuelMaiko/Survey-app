@@ -11,6 +11,23 @@
         </a>
     </div>
     <a href="{% url 'last__question' %}" class="underline hover:no-underline text-[1rem] lg:text-[1.1rem] text-blue-700 ml-4">Go Back</a>
+    
+    {% if messages %}
+        {% for message in messages %}
+            <div class="notif_div w-[90%] absolute left-1/2 -translate-x-1/2 top-[5.5rem] md:top-[5rem] mx-auto lg:mt-2 md:w-[60%] lg:w-[55%]">
+
+                <div class="relative  text-[0.9rem] lg:text-[1.03rem] {% if message.tags == 'error' %} text-amber-800 bg-amber-100 {% elif message.tags == 'success' %} text-white bg-green-500 {% endif %} shadow-[1px_1px_10px_rgba(0,0,0,0.2)] p-4 lg:p-5">
+                    <h1 class="pr-8"><strong class="mr-2">Hey!</strong>{{message}}</h1>
+                    <div class="notif__cancel absolute top-1/2 -translate-y-1/2 right-4 transition-colors duration-300 rounded-full p-1 {% if message.tags == 'success' %} text-white {% else %} text-amber-800 {% endif %} hover:text-[#333333] cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                        </svg>              
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+
 <div class="w-full h-full grid place-items-center">
     <div class="p-4">
         <div class="w-[98%] mx-auto bg-[#ffffff] shadow-[1px_1px_10px_rgba(0,0,0,0.15)] overflow-hidden rounded-lg mt-6 pb-16 pt-8 p-5">
@@ -29,6 +46,16 @@
             </form>
         </div>
         {{messagi}}
+        <script>
+            
+            const notifCancelBtn=document.querySelector('.notif__cancel')
+            notifCancelBtn.addEventListener('click', ()=>{
+                document.querySelector('.notif_div').style.display="none"
+            })
+            const intervalId=setInterval(()=>{
+                document.querySelector('.notif_div').style.display="none"
+            }, 5000)
+        </script>
     </div>
 </div>
 </div>
